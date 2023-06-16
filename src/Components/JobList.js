@@ -1,4 +1,5 @@
-import { Row, Col, Image, Container, Stack, Badge } from 'react-bootstrap';
+import { Row, Col, Image, Container, Stack, Badge, Button } from 'react-bootstrap';
+import SkillBadge from './SkillBadge';
 
 export default function JobList({ jobs }) {
 
@@ -19,11 +20,11 @@ export default function JobList({ jobs }) {
                                         <Col>
                                             <Stack direction="horizontal" gap={3}>
                                                 <span className='text-emerald fw-bold'>{job.company}</span>
-                                                {job.tags.map(tag => 
-                                                    <>
+                                                {job.tags.map((tag, index) =>
+                                                    <div key={index}>
                                                         {tag === "NEW!" && <Badge pill className="bg-emerald">{tag}</Badge>}
                                                         {tag === "FEATURED" && <Badge pill className="bg-dark">{tag}</Badge>}
-                                                    </>)}
+                                                    </div>)}
                                             </Stack>
 
                                             <h5 className='text-emerald fw-bold mt-2'>{job.jobTitle}</h5>
@@ -39,8 +40,13 @@ export default function JobList({ jobs }) {
                                     </Row>
                                 </Col>
 
-                                <Col xs={6}>
-                                    {job.skills}
+                                <Col xs={6} className='d-flex justify-content-center align-items-center'>
+                                    <Stack direction="horizontal" gap={3}>
+                                        {job.skills.map((skill, index) =>
+                                            <div key={index} >
+                                                <SkillBadge skill={skill}/>
+                                            </div>)}
+                                    </Stack>
                                 </Col>
                             </Row>
                         </div>

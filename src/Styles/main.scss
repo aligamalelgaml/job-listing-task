@@ -1,9 +1,10 @@
 @import '~bootstrap/scss/bootstrap';
 
 $emerald: #58a9a7;
+$white-emerald: #f0fafb;
 
 body {
-    background-color: #f0fafb;
+    background-color: $white-emerald
 }
 
 .bg-white {
@@ -15,5 +16,25 @@ body {
 }
 
 .text-emerald {
+    color: $emerald !important;
+}
+
+.emerald-btn {
+    background-color: $white-emerald ;
+    border-color: $white-emerald;
     color: $emerald;
+
+    &:hover {
+        @extend .emerald-btn-inverted;
+    }
+}
+
+.emerald-btn-inverted {
+    background-color: $emerald ;
+    border-color: $emerald;
+    color: $white-emerald;
+
+    &:hover {
+        @extend .emerald-btn;
+    }
 }
