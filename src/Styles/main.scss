@@ -1,0 +1,19 @@
+@import '~bootstrap/scss/bootstrap';
+
+$emerald: #58a9a7;
+
+body {
+    background-color: #f0fafb;
+}
+
+.bg-white {
+    background-color: #ffffff;
+}
+
+.bg-emerald {
+    background-color: $emerald !important;
+}
+
+.text-emerald {
+    color: $emerald;
+}
