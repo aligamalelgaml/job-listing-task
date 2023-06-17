@@ -116,19 +116,34 @@ const data = [
   },
 ];
 
-export default function JobListing() {
-  const [jobs, setJobs] = useState(data);
-  const [filteredskills, setFilteredSkills] = useState([])
+const initSkills = { frontend: false, senior: false, html: false, css: false, javascript: false, fullstack: false, midweight: false, python: false, react: false, junior: false, sass: false, ruby: false, backend: false, ror: false, vue: false, django: false };
 
-  const addFilter = (newFilteredSkills) => {
-    setFilteredSkills(newFilteredSkills)
+
+export default function JobPage() {
+  const jobs = data;
+  const [filteredSkills, setFilteredSkills] = useState(initSkills)
+
+  const addFilter = (skillName) => {
+    setFilteredSkills((prevFilteredSkills) => ({
+      ...prevFilteredSkills,
+      [skillName.toLowerCase()]: true,
+    })
+    )
   }
-  
+
+  const removeFilter = (skillName) => {
+    setFilteredSkills((prevFilteredSkills) => ({
+      ...prevFilteredSkills,
+      [skillName.toLowerCase()]: false,
+    })
+    )
+  }
+
   return (
     <>
-      <Header/>
-      <JobFilter filteredSkills={filteredskills}/>
-      <JobList jobs={jobs} addFilter={addFilter}/>
+      <Header />
+      <JobFilter filteredSkills={filteredSkills} removeFilter={removeFilter} />
+      <JobList jobs={jobs} filteredSkills={filteredSkills} addFilter={addFilter} />
     </>
   );
 }

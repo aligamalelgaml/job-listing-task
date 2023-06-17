@@ -1,10 +1,18 @@
-import { Container, Stack, Button, ButtonGroup, Form, InputGroup } from 'react-bootstrap';
+import { Container, Row, Button, ButtonGroup, Col } from 'react-bootstrap';
 
 
-export default function JobFilter({ filteredSkills }) {
+export default function JobFilter({ filteredSkills, removeFilter }) {
 
-  const removeFilter = (skillName) => {
-    console.log("Removing:", skillName)
+  const removeSkillFilter = (skillName) => {
+    console.log("Removing skill:", skillName)
+    removeFilter(skillName)
+  }
+
+  const removeAllFilters = () => {
+    console.log("Removing all filters..");
+    filteredSkillArray.forEach(skill => {
+      if (skill["status"]) removeSkillFilter(skill["name"])
+    })
   }
 
   const filteredSkillArray = Object.keys(filteredSkills).map((key) => {
@@ -17,23 +25,29 @@ export default function JobFilter({ filteredSkills }) {
   return (
     <>
       <Container>
-        <Stack direction="horizontal" className="bg-white border p-4 mb-5 rounded" gap={3}>
-          {filteredSkillArray.map((skill) =>
-            <div key={skill["name"]}>
-              {skill["status"] &&
-                <>
+        <Row className="bg-white border p-3 pt-0 mb-5 rounded">
+          <Col xs={11}>
+            <Row>
+
+              {filteredSkillArray.map((skill) =>
+                skill["status"] &&
+                <Col xs={2} className='my-3 d-flex justify-content-center' key={skill["name"]}>
                   <ButtonGroup aria-label="Basic example">
                     <Button disabled className='fs-6 fw-bold emerald-btn'>{skill["name"]} </Button>
-                    <Button className='emerald-btn-inverted py-0' onClick={() => removeFilter(skill["name"])}> <span className='fs-3'>&times;</span></Button>
+                    <Button className='emerald-btn-inverted py-0' onClick={() => removeSkillFilter(skill["name"])}> <span className='fs-3'>&times;</span></Button>
                   </ButtonGroup>
+                </Col>
 
-                </>
-              }
-            </div>
-          )}
+              )}
+            </Row>
+          </Col>
+
+          <Col xs={1} className='pt-3 ps-3 text-end'>
+            <Button variant="link" className='fs-5 fw-bold text-emerald text-decoration-underline' onClick={removeAllFilters}>Clear</Button>
+          </Col>
 
 
-        </Stack>
+        </Row>
       </Container>
     </>
   );

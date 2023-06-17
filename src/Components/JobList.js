@@ -1,29 +1,22 @@
-import { Row, Col, Image, Container, Stack, Badge, Button } from 'react-bootstrap';
+import { Row, Col, Image, Container, Stack, Badge} from 'react-bootstrap';
 import SkillBadge from './SkillBadge';
-import { useEffect, useState } from 'react';
 
-const initSkills = {frontend: false, senior: false, html: false, css: false, javascript: false, fullstack: false, midweight: false, python: false, react: false, junior: false, sass: false, ruby: false, backend: false, ror: false, vue: false, django: false};
 
-export default function JobList({ jobs, addFilter }) {
-    const [filteredSkills, setFilteredSkills] = useState(initSkills)
+export default function JobList({ jobs, addFilter, filteredSkills }) {
 
     const addSkillFilter = (skill) => {
         console.log("Adding skill: ", skill)
-        setFilteredSkills((prevSkills) => ({
-          ...prevSkills,
-          [skill.toLowerCase()]: true,
-        }));
-      };
+        addFilter(skill)
+    };
 
-    useEffect(() => {
-        addFilter(filteredSkills);
-    }, [filteredSkills])
+    const desiredFilter = Object.entries(filteredSkills).filter(([skillName, status]) => status === true).map(([skillName, status]) => skillName);;
 
     return (
         <>
             <Container>
                 <Stack gap={3}>
                     {jobs.map((job) =>
+                        desiredFilter.every(skill => job.skills.some(jobSkill => jobSkill.toLowerCase() === skill.toLowerCase())) &&
                         <div className="bg-white border p-4 rounded" key={job.id}>
                             <Row>
                                 <Col xs={6}>
@@ -59,7 +52,7 @@ export default function JobList({ jobs, addFilter }) {
                                     <Stack direction="horizontal" gap={3}>
                                         {job.skills.map((skill, index) =>
                                             <div key={index} >
-                                                <SkillBadge skill={skill} status={filteredSkills[skill.toLowerCase()]} addSkillFilter={addSkillFilter}/>
+                                                <SkillBadge skill={skill} status={filteredSkills[skill.toLowerCase()]} addSkillFilter={addSkillFilter} />
                                             </div>)}
                                     </Stack>
                                 </Col>
