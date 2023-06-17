@@ -3,6 +3,9 @@ import { Button } from 'react-bootstrap';
 
 export default function JobList({ skill, addSkillFilter, status }) {
 
+    /**
+     * Passes skill name to parent component to be passed along to ancestor component for filteration purposes.
+     */
     const handleClick = () => {
         addSkillFilter(skill);
     }

@@ -4,11 +4,16 @@ import SkillBadge from './SkillBadge';
 
 export default function JobList({ jobs, addFilter, filteredSkills }) {
 
+    /**
+     * Prop function used to change parent component's status of passed skill name.
+     * @param {string} skill | String representing skill name.
+     */
     const addSkillFilter = (skill) => {
         console.log("Adding skill: ", skill)
         addFilter(skill)
     };
 
+    // Converts JSON Object representing status of all skills into a list of strings of all skills with a status === true.
     const desiredFilter = Object.entries(filteredSkills).filter(([skillName, status]) => status === true).map(([skillName, status]) => skillName);;
 
     return (

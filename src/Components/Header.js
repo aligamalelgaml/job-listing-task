@@ -3,8 +3,8 @@
 export default function JobList() {
     return (
         <>
-            <section className='pt-5'>
-
+            <section className='p-5 header'>
+                
             </section>
         </>
     );

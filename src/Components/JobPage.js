@@ -123,6 +123,10 @@ export default function JobPage() {
   const jobs = data;
   const [filteredSkills, setFilteredSkills] = useState(initSkills)
 
+  /**
+   * Sets the status of skillName to true for filteration.
+   * @param {string} skillName | Accepts a string that represents the skill name.
+   */
   const addFilter = (skillName) => {
     setFilteredSkills((prevFilteredSkills) => ({
       ...prevFilteredSkills,
@@ -131,6 +135,10 @@ export default function JobPage() {
     )
   }
 
+  /**
+   * Sets the status of skillName to false to remove from filteration.
+   * @param {string} skillName | Accepts a string that represents the skill name.
+   */
   const removeFilter = (skillName) => {
     setFilteredSkills((prevFilteredSkills) => ({
       ...prevFilteredSkills,

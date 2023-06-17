@@ -7,6 +7,16 @@ body {
     background-color: $white-emerald
 }
 
+.header {
+    background-image: url(../Assets/header.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.offset-up {
+    margin-top: -2rem;
+}
+
 .bg-white {
     background-color: #ffffff;
 }

@@ -3,18 +3,29 @@ import { Container, Row, Button, ButtonGroup, Col } from 'react-bootstrap';
 
 export default function JobFilter({ filteredSkills, removeFilter }) {
 
+  /**
+   * Passes skill to parent function that sets the status of skill to false.
+   * @param {string} skillName | String representing skill name.
+   */
   const removeSkillFilter = (skillName) => {
     console.log("Removing skill:", skillName)
     removeFilter(skillName)
   }
 
+  /**
+   * Calls removeSkillFilter for all skills with status === true in order to remove them.
+   * @param {string} skillName | String representing skill name.
+   */
   const removeAllFilters = () => {
     console.log("Removing all filters..");
     filteredSkillArray.forEach(skill => {
       if (skill["status"]) removeSkillFilter(skill["name"])
     })
   }
-
+  
+  /**
+   * Simple helper function to convert filteredSkills object to an array of JSON objects respresented skill names & status that can be iterated over.
+   */
   const filteredSkillArray = Object.keys(filteredSkills).map((key) => {
     return {
       name: key.charAt(0).toUpperCase() + key.slice(1),
@@ -24,8 +35,8 @@ export default function JobFilter({ filteredSkills, removeFilter }) {
 
   return (
     <>
-      <Container>
-        <Row className="bg-white border p-3 pt-0 mb-5 rounded">
+      <Container className='offset-up'>
+        <Row className="bg-white border p-3 mb-5 rounded">
           <Col xs={11}>
             <Row>
 
