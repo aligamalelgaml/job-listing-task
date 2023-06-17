@@ -1,19 +1,16 @@
-import { useState } from "react"
 import { Button } from 'react-bootstrap';
 
 
-export default function JobList({ skill }) {
-    const [buttonState, setButtonState] = useState(false)
+export default function JobList({ skill, addSkillFilter, status }) {
 
     const handleClick = () => {
-        setButtonState(!buttonState);
+        addSkillFilter(skill);
     }
-
 
     return (
         <>
-            {!buttonState && <Button className='fs-6 fw-bold emerald-btn' onClick={handleClick}>{skill}</Button>}
-            {buttonState && <Button className='fs-6 fw-bold emerald-btn-inverted' onClick={handleClick}>{skill}</Button>}
+            {!status && <Button className='fs-6 fw-bold emerald-btn' onClick={handleClick}>{skill}</Button>}
+            {status && <Button disabled className='fs-6 fw-bold emerald-btn-inverted'>{skill}</Button>}
         </>
     )
 }

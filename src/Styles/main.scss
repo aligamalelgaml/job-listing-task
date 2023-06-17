@@ -27,6 +27,11 @@ body {
     &:hover {
         @extend .emerald-btn-inverted;
     }
+
+    &:disabled {
+        @extend .emerald-btn;
+        opacity: 1 !important;
+    }
 }
 
 .emerald-btn-inverted {
@@ -37,4 +42,13 @@ body {
     &:hover {
         @extend .emerald-btn;
     }
+
+    &:disabled {
+        @extend .emerald-btn-inverted;
+        opacity: 1 !important;
+    }
+}
+
+.enable-cursor {
+    cursor: pointer !important;
 }

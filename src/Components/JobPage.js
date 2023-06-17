@@ -118,12 +118,17 @@ const data = [
 
 export default function JobListing() {
   const [jobs, setJobs] = useState(data);
+  const [filteredskills, setFilteredSkills] = useState([])
+
+  const addFilter = (newFilteredSkills) => {
+    setFilteredSkills(newFilteredSkills)
+  }
   
   return (
     <>
       <Header/>
-      <JobFilter/>
-      <JobList jobs={jobs}/>
+      <JobFilter filteredSkills={filteredskills}/>
+      <JobList jobs={jobs} addFilter={addFilter}/>
     </>
   );
 }
